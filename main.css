@@ -12,6 +12,10 @@ body {
   cursor: pointer;
 }
 
+#display {
+  display: flex;
+}
+
 .choice {
   height: 285px;
   width: 200px;
@@ -20,7 +24,7 @@ body {
   position: relative;
 }
 
-/* .hidden {
+.hidden {
   display: none;
 }
 
@@ -31,7 +35,28 @@ body {
   position: absolute;
   top: 100px;
   left: 30px;
-} */
+  font-size: 45px;
+}
+
+.loser {
+  height: 50px;
+  width: 140px;
+  background-color: red;
+  position: absolute;
+  top: 100px;
+  left: 30px;
+  font-size: 45px;
+}
+
+.tie {
+  height: 50px;
+  width: 140px;
+  background-color: blue;
+  position: absolute;
+  top: 100px;
+  left: 30px;
+  font-size: 45px;
+}
 
 .choice-display-img {
   height: 200px;
@@ -54,8 +79,4 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-#display {
-  display: flex;
 }

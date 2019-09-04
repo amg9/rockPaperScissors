@@ -7,8 +7,11 @@ var userDisplay = document.getElementById("user-choice-img");
 var compDisplay = document.getElementById("comp-choice-img");
 var shootButton = document.getElementById("shoot");
 var choices = [ "rock", "paper", "scissors" ];
-// var userResult = document.getElementById("user-result");
-// var compResult = document.getElementById("comp-result");
+var userWin = document.getElementById("user-win");
+var compWin = document.getElementById("comp-win");
+var userLose = document.getElementById("user-lose");
+var compLose = document.getElementById("comp-lose");
+var tie = document.getElementById("tie");
 var winBox = document.getElementById("win-box");
 var wins = 0;
 var loseBox = document.getElementById("lose-box");
@@ -57,46 +60,61 @@ function makeCompChoice() {
   }
 }
 
+function hideWin() {
+  userWin.classList.add("hidden");
+  compLose.classList.add("hidden");
+}
+
 function win() {
   wins += 1;
+  compLose.classList.remove("hidden");
+  userWin.classList.remove("hidden");
+  setTimeout(hideWin, 2000);
+}
+
+function hideLose() {
+  userLose.classList.add("hidden");
+  compWin.classList.add("hidden");
 }
 
 function lose() {
   loses += 1;
+  compWin.classList.remove("hidden");
+  userLose.classList.remove("hidden");
+  setTimeout(hideLose, 2000);
+}
+
+function hideTie() {
+  tie.classList.add("hidden");
 }
 
 function result() {
   plays++;
   switch(userChoice) {
     case compChoice:
-      alert("tie");
       ties += 1;
+      tie.classList.remove("hidden");
+      setTimeout(hideTie, 2000);
       break;
     case "rock":
       if (compChoice === "scissors") {
         win();
-        alert("you win");
       } else {
         lose();
-        alert("you lose");
       }
       break;
     case "paper":
         if (compChoice === "rock") {
           win();
-          alert("you win");
         } else {
           lose();
-          alert("you lose");
         }
       break;
     case "scissors":
         if (compChoice === "paper") {
-          win();
-          alert("you win");      
+          win();   
         } else {
           lose();
-          alert("you lose");
         }
       break;
     default:
@@ -105,10 +123,6 @@ function result() {
   winBox.innerHTML = wins + ` (${Math.trunc((wins/plays)*100)}%)`;
   loseBox.innerHTML = loses + ` (${Math.trunc((loses/plays)*100)}%)`;
   tieBox.innerHTML = ties + ` (${Math.trunc((ties/plays)*100)}%)`;
-}
-
-function scoreDisplay() {
-  
 }
 
 function shoot() {
@@ -131,6 +145,8 @@ function reset() {
   winBox.innerHTML = wins + ` (0%)`;
   loseBox.innerHTML = loses + ` (0%)`;
   tieBox.innerHTML = ties + ` (0%)`;
+
+  userChoice = undefined
 
   userDisplay.src = "https://cdn0.iconfinder.com/data/icons/handdrawn-ui-elements/512/Question_Mark-512.png";
   compDisplay.src = "https://cdn0.iconfinder.com/data/icons/handdrawn-ui-elements/512/Question_Mark-512.png";
