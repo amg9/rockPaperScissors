@@ -16,6 +16,7 @@ var loses = 0;
 var tieBox = document.getElementById("tie-box");
 var ties = 0;
 var plays = 0;
+var resetButton = document.getElementById("reset");
 
 
 function chooseRock() {
@@ -101,9 +102,13 @@ function result() {
     default:
       alert("something went wrong");
   }
-  winBox.innerHTML = wins + ` (${Math.trunc((wins/plays)*100)}%)`;;
+  winBox.innerHTML = wins + ` (${Math.trunc((wins/plays)*100)}%)`;
   loseBox.innerHTML = loses + ` (${Math.trunc((loses/plays)*100)}%)`;
-  tieBox.innerHTML = ties + ` (${Math.trunc((ties/plays)*100)}%)`;;
+  tieBox.innerHTML = ties + ` (${Math.trunc((ties/plays)*100)}%)`;
+}
+
+function scoreDisplay() {
+  
 }
 
 function shoot() {
@@ -116,3 +121,19 @@ function shoot() {
 }
 
 shootButton.addEventListener("click", shoot)
+
+function reset() {
+  wins = 0;
+  loses = 0;
+  ties = 0;
+  plays = 0;
+
+  winBox.innerHTML = wins + ` (0%)`;
+  loseBox.innerHTML = loses + ` (0%)`;
+  tieBox.innerHTML = ties + ` (0%)`;
+
+  userDisplay.src = "https://cdn0.iconfinder.com/data/icons/handdrawn-ui-elements/512/Question_Mark-512.png";
+  compDisplay.src = "https://cdn0.iconfinder.com/data/icons/handdrawn-ui-elements/512/Question_Mark-512.png";
+}
+
+resetButton.addEventListener("click", reset)
