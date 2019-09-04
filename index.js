@@ -7,6 +7,16 @@ var userDisplay = document.getElementById("user-choice-img");
 var compDisplay = document.getElementById("comp-choice-img");
 var shootButton = document.getElementById("shoot");
 var choices = [ "rock", "paper", "scissors" ];
+// var userResult = document.getElementById("user-result");
+// var compResult = document.getElementById("comp-result");
+var winBox = document.getElementById("win-box");
+var wins = 0;
+var loseBox = document.getElementById("lose-box");
+var loses = 0;
+var tieBox = document.getElementById("tie-box");
+var ties = 0;
+var plays = 0;
+
 
 function chooseRock() {
   userChoice = this.id;
@@ -46,35 +56,54 @@ function makeCompChoice() {
   }
 }
 
+function win() {
+  wins += 1;
+}
+
+function lose() {
+  loses += 1;
+}
+
 function result() {
+  plays++;
   switch(userChoice) {
     case compChoice:
       alert("tie");
+      ties += 1;
       break;
     case "rock":
       if (compChoice === "scissors") {
+        win();
         alert("you win");
       } else {
+        lose();
         alert("you lose");
       }
       break;
     case "paper":
         if (compChoice === "rock") {
+          win();
           alert("you win");
         } else {
+          lose();
           alert("you lose");
         }
       break;
     case "scissors":
         if (compChoice === "paper") {
-          alert("you win");
+          win();
+          alert("you win");      
         } else {
+          lose();
           alert("you lose");
         }
       break;
     default:
       alert("something went wrong");
   }
+  winBox.innerHTML = wins + ` (${Math.trunc((wins/plays)*100)}%)`;;
+  loseBox.innerHTML = loses + ` (${Math.trunc((loses/plays)*100)}%)`;
+  tieBox.innerHTML = ties + ` (${Math.trunc((ties/plays)*100)}%)`;;
 }
 
 function shoot() {
@@ -84,12 +113,6 @@ function shoot() {
   } else {
     alert("Please make a choice")
   }
-
 }
 
 shootButton.addEventListener("click", shoot)
-
-
-// get comp choice
-// display those choices to the browser
-// decide who wins
